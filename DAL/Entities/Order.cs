@@ -8,7 +8,9 @@ namespace DAL.Entities
     {
         public int Id { get; set; }
         public DateTime Date { get; set; }
-        public List<Part> PartsForReplacement { get; set; } = new List<Part>();
+        public ICollection<Part> PartsForReplacement { get; set; } = new List<Part>();
+        public Owner Owner { get; set; }
+        public int OwnerId { get; set; }    
 
     }
 }

@@ -8,11 +8,11 @@ namespace DAL.Interfaces
 {
     interface IUnitOfWork
     {
-        public IRepository<Computer> ComputerRepository { get; }
-        public IRepository<ComputerParts> ComputerPartsRepository { get; }
-        public IRepository<Order> OrderRepository { get; }
-        public IRepository<Owner> OwnerRepository { get; }
-        public IRepository<Part> PartRepository { get; }
+        IRepository<Computer> ComputerRepository { get; }
+        IRepository<ComputerParts> ComputerPartsRepository { get; }
+        IRepository<Order> OrderRepository { get; }
+        IRepository<Owner> OwnerRepository { get; }
+        IRepository<Part> PartRepository { get; }
         Task Save();
     }
 }
