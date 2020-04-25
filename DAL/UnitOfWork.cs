@@ -7,7 +7,7 @@ using DAL.Interfaces;
 
 namespace DAL
 {
-    class UnitOfWork : IUnitOfWork
+   public class UnitOfWork : IUnitOfWork
     {
         private readonly ComputerServiceDbContext _context;
         public UnitOfWork(IRepository<Computer> computerRepository, IRepository<ComputerParts> computerPartsRepository, IRepository<Order> orderRepository, IRepository<Owner> ownerRepository, IRepository<Part> partRepository, ComputerServiceDbContext context)

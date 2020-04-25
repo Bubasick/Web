@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(ComputerServiceDbContext))]
-    [Migration("20200411162940_initialCreate")]
-    partial class initialCreate
+    [Migration("20200425154255_Naprimer")]
+    partial class Naprimer
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -39,6 +39,13 @@ namespace DAL.Migrations
                     b.HasIndex("OwnerId");
 
                     b.ToTable("Computers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            OwnerId = 1
+                        });
                 });
 
             modelBuilder.Entity("DAL.Entities.ComputerParts", b =>
@@ -56,6 +63,12 @@ namespace DAL.Migrations
                     b.HasIndex("ComputerId");
 
                     b.ToTable("ComputerParts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1
+                        });
                 });
 
             modelBuilder.Entity("DAL.Entities.Order", b =>
@@ -71,11 +84,23 @@ namespace DAL.Migrations
                     b.Property<int>("OwnerId")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("OwnerId");
 
                     b.ToTable("Orders");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            OwnerId = 0,
+                            Price = 0m
+                        });
                 });
 
             modelBuilder.Entity("DAL.Entities.Owner", b =>
@@ -85,9 +110,19 @@ namespace DAL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Owners");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Nameless dude"
+                        });
                 });
 
             modelBuilder.Entity("DAL.Entities.Part", b =>
@@ -99,6 +134,9 @@ namespace DAL.Migrations
 
                     b.Property<int?>("ComputerPartsId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("DateOfCreation")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
@@ -113,6 +151,15 @@ namespace DAL.Migrations
                     b.HasIndex("OrderId");
 
                     b.ToTable("Parts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DateOfCreation = new DateTime(2020, 4, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            OrderId = 0,
+                            PartName = "SHS"
+                        });
                 });
 
             modelBuilder.Entity("DAL.Entities.Computer", b =>

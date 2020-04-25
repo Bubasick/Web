@@ -6,7 +6,7 @@ using DAL.Entities;
 
 namespace DAL.Interfaces
 {
-    interface IUnitOfWork
+    public interface IUnitOfWork
     {
         IRepository<Computer> ComputerRepository { get; }
         IRepository<ComputerParts> ComputerPartsRepository { get; }

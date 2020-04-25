@@ -10,7 +10,8 @@ namespace DAL.Entities
         public DateTime Date { get; set; }
         public ICollection<Part> PartsForReplacement { get; set; } = new List<Part>();
         public Owner Owner { get; set; }
-        public int OwnerId { get; set; }    
+        public int OwnerId { get; set; }
+        public decimal Price { get; set; }
 
     }
 }

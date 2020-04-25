@@ -8,6 +8,7 @@ namespace DAL.Entities
     {
         public int Id { get; set; }
         public ICollection<Computer> Computers { get; set; } = new List<Computer>();
+        public string Name { get; set; }    
 
     }
 }

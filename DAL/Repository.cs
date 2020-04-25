@@ -7,7 +7,7 @@ using DAL.Interfaces;
 
 namespace DAL
 {
-    class Repository<TEntity> : IRepository<TEntity> where TEntity: class
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity: class
     {
         private ComputerServiceDbContext _context;
 
