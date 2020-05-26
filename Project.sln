@@ -9,7 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BLL", "BLL\BLL.csproj", "{1D8707D8-3B4F-48A1-AF97-CC7A47A351B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC", "MVC\MVC.csproj", "{F6AE6C07-B72C-400F-A1E0-90ACA989E631}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVC", "MVC\MVC.csproj", "{F6AE6C07-B72C-400F-A1E0-90ACA989E631}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1D8707D8-3B4F-48A1-AF97-CC7A47A351B6} = {1D8707D8-3B4F-48A1-AF97-CC7A47A351B6}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

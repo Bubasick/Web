@@ -2,13 +2,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BLL.AutoMapper;
+using BLL.Interfaces;
+using BLL.Services;
+using DAL;
+using DAL.Entities;
+using DAL.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
 namespace MVC
 {
     public class Startup
@@ -24,6 +31,23 @@ namespace MVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddIdentity<User, IdentityRole>(opt =>
+                {
+                    opt.Password.RequireUppercase = false;
+                    opt.Password.RequireNonAlphanumeric = false;
+                    opt.Password.RequiredLength = 4;
+                    opt.Password.RequireDigit = false;
+                    opt.User.RequireUniqueEmail = true;
+                })
+                .AddEntityFrameworkStores<ComputerServiceDbContext>();
+            services.AddDbContext<ComputerServiceDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ComputerService"), x => x.MigrationsAssembly("DAL")));
+            services.AddControllers();
+            services.BindMapper();
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IPartService, PartService>();
+            services.AddTransient<IOwnerService, OwnerService>();
+            services.AddTransient<IOrderService, OrderService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,7 +67,7 @@ namespace MVC
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
