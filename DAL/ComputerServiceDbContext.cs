@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using DAL.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace DAL
 {
-    public class ComputerServiceDbContext : DbContext
+    public class ComputerServiceDbContext : IdentityDbContext<User>
     {
         public DbSet<Computer> Computers { get; set; }
         public DbSet<ComputerParts> ComputerParts { get; set; }
@@ -26,6 +27,7 @@ namespace DAL
                 PartName = "SHS",
                 DateOfCreation = DateTime.Today,
                 Id = 1,
+                OrderId = 1
             };
 
             Owner owner = new Owner()
@@ -41,7 +43,8 @@ namespace DAL
             };
             Order order = new Order()
             {
-                Id = 1
+                Id = 1,
+                OwnerId = 1
 
             };
 

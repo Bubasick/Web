@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
+    [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class OwnerController : ControllerBase
@@ -18,6 +19,12 @@ namespace Api.Controllers
         public OwnerController(IOwnerService ownerService)
         {
             _ownerService = ownerService;
+        }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<OwnerDTO>> GetAll()
+        {
+            return Ok(_ownerService.GetAll());
         }
 
         [HttpGet("GetByOwnerName/{name}")]

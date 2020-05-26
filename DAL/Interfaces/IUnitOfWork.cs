@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using DAL.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace DAL.Interfaces
 {
@@ -13,6 +14,8 @@ namespace DAL.Interfaces
         IRepository<Order> OrderRepository { get; }
         IRepository<Owner> OwnerRepository { get; }
         IRepository<Part> PartRepository { get; }
+        UserManager<User> UserManager { get; }
+        public SignInManager<User> SignInManager { get; }
         Task Save();
     }
 }

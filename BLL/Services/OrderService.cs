@@ -37,7 +37,6 @@ namespace BLL.Services
             var order = new OrderDTO() { PartsForReplacement = partsForReplacement, Price = price, Date = DateTime.Now };
             foreach (var part in partsForReplacement)
             {
-                part.Order = order;
                 part.OrderId = order.Id;
             }
             var orderEntity = _mapper.Map<Order>(order);

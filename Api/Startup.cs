@@ -8,9 +8,11 @@ using BLL;
 using BLL.AutoMapper;
 using BLL.Interfaces;
 using BLL.Services;
+using DAL.Entities;
 using DAL.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -33,6 +35,15 @@ namespace Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddIdentity<User, IdentityRole>(opt =>
+                {
+                    opt.Password.RequireUppercase = false;
+                    opt.Password.RequireNonAlphanumeric = false;
+                    opt.Password.RequiredLength = 4;
+                    opt.Password.RequireDigit = false;
+                    opt.User.RequireUniqueEmail = true;
+                })
+                .AddEntityFrameworkStores<ComputerServiceDbContext>();
             services.AddDbContext<ComputerServiceDbContext>(options =>options.UseSqlServer(Configuration.GetConnectionString("ComputerService"), x => x.MigrationsAssembly("DAL")));
             services.AddControllers();
             services.BindMapper();
@@ -45,6 +56,9 @@ namespace Api
             services.AddTransient<IPartService, PartService>();
             services.AddTransient<IOwnerService, OwnerService>();
             services.AddTransient<IOrderService, OrderService>();
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -12,6 +12,6 @@ namespace BLL.Interfaces
         OwnerDTO Find(int OrderId);
         IEnumerable<OwnerDTO> Find(DateTime date);
         IEnumerable<OwnerDTO> FindByComputerModel(string name);
-
+        IEnumerable<OwnerDTO> GetAll();
     }
 }

@@ -35,8 +35,7 @@ namespace BLL.Services
 
         public async Task<IEnumerable<PartDTO>> Find(int orderId)
         {
-            var order = await _unitOfWork.OrderRepository.GetById(orderId);
-            var parts = order.PartsForReplacement;
+            var parts = _unitOfWork.PartRepository.GetAll().Where(p => p.OrderId.Equals(orderId));
             return _mapper.Map<IEnumerable<PartDTO>>(parts);
         }
     }

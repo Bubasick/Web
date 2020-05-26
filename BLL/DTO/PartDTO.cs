@@ -5,6 +5,5 @@
         public int Id { get; set;}
         public string PartName { get; set; }
         public int OrderId { get; set; }
-        public OrderDTO Order { get; set; }
     }
 }

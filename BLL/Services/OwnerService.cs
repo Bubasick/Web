@@ -50,5 +50,10 @@ namespace BLL.Services
             var owner = _unitOfWork.OwnerRepository.GetAll().Where(o => o.Computers.Any(c => c.ModelName.Equals(name)));
             return _mapper.Map<IEnumerable<OwnerDTO>>(owner);
         }
+
+        public IEnumerable<OwnerDTO> GetAll()
+        {
+            return _mapper.Map<IEnumerable<OwnerDTO>>(_unitOfWork.OwnerRepository.GetAll().ToList());
+        }
     }
 }

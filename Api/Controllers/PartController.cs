@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
+    [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class PartController : ControllerBase
@@ -27,8 +28,8 @@ namespace Api.Controllers
         }
 
        
-        [HttpGet("GetByPartId/{id}")]
-        public ActionResult<PartDTO> GetByPartId(int id)
+        [HttpGet("GetPartByOrderId/{id}")]
+        public ActionResult<PartDTO> GetPartByOrderId(int id)
         {
             return Ok(_partService.Find(id));
         }

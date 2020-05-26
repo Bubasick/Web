@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
+    [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class OrderController : ControllerBase
@@ -22,9 +23,10 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        public ActionResult<OrderDTO> GetByOwnerName([FromQuery]ICollection<PartDTO> partsForReplacement, decimal price)
+        public async Task<ActionResult<OrderDTO>> CreeateOrder([FromQuery]ICollection<PartDTO> partsForReplacement, decimal price)
         {
-            return Ok(_orderService.CreateOrder(partsForReplacement,price));
+            await _orderService.CreateOrder(partsForReplacement, price);
+            return Ok();
         }
      
 
